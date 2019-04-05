@@ -15,6 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/thetuto', function () {
+    return view('thehome');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::apiResource('texts', 'TextController');
