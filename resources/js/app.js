@@ -3,13 +3,50 @@ require('./bootstrap');
 window.Vue = require('vue');
 import InfiniteLoading from 'vue-infinite-loading';
 
-Vue.component('app', require('./components/AppComponent.vue').default);
-Vue.component('posts', require('./components/PostsComponent.vue').default);
+import Vuex from 'vuex'
+Vue.use(Vuex)
+
+Vue.component('products', require('./components/ProductsComponent.vue').default);
+Vue.component('product', require('./components/ProductComponent.vue').default);
+Vue.component('the-product', require('./components/TheProductComponent.vue').default);
 Vue.component('inf-load', InfiniteLoading);
 
-import router from './routes';
+const store = new Vuex.Store({
+  state: {
+    isProduct: false
+  },
+  mutations: {
+    changeProductView(state, bProduct) {
+      state.isProduct = bProduct;
+    }
+  }
+});
 
-const app = new Vue({
-    el: '#app',
-    router
+// import router from './routes';
+
+var app = new Vue({
+    el: '#products',
+    store,
+    data: {
+      message: 'Hello Vue!'
+    },
+    methods: {
+      goForProducts(cat) {
+        if (this.$refs.prods != undefined) {
+          this.$refs.prods.goForProducts(cat);
+        }
+      },
+      goCategory(cat) {
+        if (store.state.isProduct) {
+          window.location = "./";
+        }
+        else {
+          this.goForProducts(cat);
+        }
+      },
+      ...Vuex.mapMutations(['changeProductView'])
+    },
+    computed: {
+      ...Vuex.mapState(['isProduct'])
+    },
 });

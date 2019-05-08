@@ -6,14 +6,8 @@ Vue.use(Router)
 export default new Router({
     routes: [
         {
-            path: './',
-            name: 'home',
-            component: require('./views/Home').default
-        },
-        {
-            path: './blog',
-            name: 'blog',
-            component: require('./views/Blog').default
+            path: '/products',
+            component: require('./components/ProductsComponent').default    
         },
         {
             path: './:slug',

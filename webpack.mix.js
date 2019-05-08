@@ -11,4 +11,14 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js');
+mix.js([
+         'resources/js/all.min.js',
+         'resources/js/app.js',
+         'resources/js/pal_nav.js'
+      ], 
+      'public/js/app.js')
+   .styles([
+            'resources/css/bootstrap.css',
+            'resources/css/app.css'
+            ],
+         'public/css/app.css');
